@@ -1,0 +1,14 @@
+---
+name: unity-rule
+description: This is a new rule
+---
+
+# Overview
+
+This rule is determine about unity project
+
+## Unity Version
+Current Unity Version: 6000.3.3f1
+
+## Unity Package
+Installed Unity Package

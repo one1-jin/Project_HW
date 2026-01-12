@@ -4,33 +4,23 @@ namespace Core.Runtime
 {
     public class FrameClockRunner : MonoBehaviour
     {
-        private static FrameClockRunner instance;
-
         void Awake()
         {
-            if (instance != null)
-            {
-                Debug.LogError(
-                    "Duplicate FrameClockRunner detected. Destroying this instance."
-                );
-                Destroy(gameObject);
-                return;
-            }
+            var runners = FindObjectsByType<FrameClockRunner>(
+                FindObjectsSortMode.None
+            );
 
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.Assert(
+                runners.Length == 1,
+                "[FrameClockRunner] Multiple runners detected in GameScene"
+            );
+
+            FrameClock.Instance.Reset();
         }
 
         void Update()
         {
             FrameClock.Instance.Update(Time.deltaTime);
         }
-
-        void OnDestroy()
-        {
-            if (instance == this)
-                instance = null;
-        }
     }
-
 }
